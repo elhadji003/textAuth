@@ -1,19 +1,32 @@
-// frontend/pages/register.js
+'use client'
 import { useState } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/router';
+import iconRed from "../assets/icon.png";
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './inscription.scss'
+import Image from 'next/image';
 
 const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
+  const [termsAccepted, setTermsAccepted] = useState(false); // Ajoutez cet état
   const router = useRouter();
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (password !== password2) {
-      return alert('Passwords do not match');
+
+
+    if (!name || !email || !password) {
+      toast.error('Tous les champs sont obligatoires et les conditions doivent être acceptées !');
+      return;
+    }
+
+    if (!termsAccepted) {
+      return toast.error('Vous devez accepter les termes et la politique pour vous inscrire');
     }
 
     try {
@@ -23,33 +36,68 @@ const Register = () => {
         password,
       });
       localStorage.setItem('token', res.data.token);
+      toast.success('Utilisateur enregistré avec succès');
       router.push('/dashboard');
     } catch (err) {
       console.error(err.response.data);
-      alert('Registration failed');
+      toast.error('Cet email existe déjà');
     }
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <div>
-        <label>Name</label>
-        <input type="text" name='name' value={name} onChange={(e) => setName(e.target.value)} required />
+    <div className="Inscription">
+      <div className='header'>
+        <div><Image src={iconRed} alt="logo" /></div>
+        <div>Red Product</div>
       </div>
-      <div>
-        <label>Email</label>
-        <input type="email" name='email' value={email} onChange={(e) => setEmail(e.target.value)} required />
+      <div className="connexion-box">
+        <div className='title'>
+          <div>Inscrivez-vous en tant qu'admin</div>
+        </div>
+        <form onSubmit={onSubmit}>
+          <div className='box-input'>
+            <div className="input">
+              <label>Prénom(s) et Nom</label>
+              <input type="text" name='name' value={name} onChange={(e) => setName(e.target.value)} />
+            </div>
+          </div>
+          <div className='box-input'>
+            <div className="input">
+              <label>Email</label>
+              <input type="email" name='email' value={email} onChange={(e) => setEmail(e.target.value)} />
+            </div>
+          </div>
+          <div className='box-input'>
+            <div className="input">
+              <label>Password</label>
+              <input type="password" name='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+            </div>
+          </div>
+          <div className='box-input'>
+            <div className="check">
+              <input
+                type="checkbox"
+                id="terms"
+                name="terms"
+                checked={termsAccepted}
+                onChange={(e) => setTermsAccepted(e.target.checked)}
+              />
+              <span>Accepter les termes et la politique</span>
+            </div>
+          </div>
+          <div className="btn-con">
+            <button className='btn-connexion' type="submit">S'inscrire</button>
+          </div>
+        </form>
       </div>
-      <div>
-        <label>Password</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+      <div className="footer-con">
+        <div className="inscrire">
+          <span>Vous avez déjà un compte ?</span>
+          <Link href={'/connexion'}> Se connecter</Link>
+        </div>
       </div>
-      <div>
-        <label>Confirm Password</label>
-        <input type="password" value={password2} onChange={(e) => setPassword2(e.target.value)} required />
-      </div>
-      <button type="submit">Register</button>
-    </form>
+      <ToastContainer />
+    </div>
   );
 };
 
