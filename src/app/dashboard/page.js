@@ -1,34 +1,35 @@
-'use client'
-
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+"use client";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
-  const [texts, setTexts] = useState([]);
-  const [newText, setNewText] = useState('');
+  const [hotels, setHotels] = useState([]);
+  const [nameHotel, setNameHotel] = useState("");
+  const [address, setAddress] = useState("");
+  const [email, setEmail] = useState("");
   const router = useRouter();
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem("token");
         if (token) {
-          const userRes = await axios.get('http://localhost:5000/api/auth/me', {
+          const userRes = await axios.get("http://localhost:5000/api/auth/me", {
             headers: {
-              'x-auth-token': token,
+              "x-auth-token": token,
             },
           });
           setUser(userRes.data);
 
-          const textsRes = await axios.get('http://localhost:5000/api/texts', {
+          const textsRes = await axios.get("http://localhost:5000/api/texts", {
             headers: {
-              'x-auth-token': token,
+              "x-auth-token": token,
             },
           });
-          setTexts(textsRes.data);
+          setHotels(textsRes.data);
         } else {
           console.log(error);
         }
@@ -41,25 +42,27 @@ const Dashboard = () => {
   }, [router]);
 
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setUser(null);
-    router.push('/');
+    router.push("/");
   };
 
   const handleCreateText = async () => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       const res = await axios.post(
-        'http://localhost:5000/api/texts',
-        { content: newText },
+        "http://localhost:5000/api/hotels",
+        { nameHotel: nameHotel, email: email, address: address },
         {
           headers: {
-            'x-auth-token': token,
+            "x-auth-token": token,
           },
         }
       );
-      setTexts([...texts, res.data]);
-      setNewText('');
+      setHotels([...hotels, res.data]);
+      setNameHotel("");
+      setAddress("");
+      setEmail("");
     } catch (err) {
       console.error(err.response);
     }
@@ -67,13 +70,13 @@ const Dashboard = () => {
 
   const handleDeleteText = async (id) => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       await axios.delete(`http://localhost:5000/api/texts/${id}`, {
         headers: {
-          'x-auth-token': token,
+          "x-auth-token": token,
         },
       });
-      setTexts(texts.filter(text => text._id !== id));
+      setHotels(hotels.filter((text) => text._id !== id));
     } catch (err) {
       console.error(err.response);
     }
@@ -83,7 +86,7 @@ const Dashboard = () => {
     return (
       <div>
         Loading... Votre session a expiré veuillez vous reconnecter !
-        <Link href={'/'}>Je me connecte</Link>
+        <Link href={"/"}>Je me connecte</Link>
       </div>
     );
   }
@@ -97,18 +100,36 @@ const Dashboard = () => {
       <div>
         <h2>Vos Textes</h2>
         <ul>
-          {texts.map(text => (
-            <li key={text._id}>
-              {text.content}
-              <button onClick={() => handleDeleteText(text._id)}>Supprimer</button>
+          {hotels.map((hotel) => (
+            <li key={hotel._id}>
+              {hotel.nameHotel} <span></span>
+              {hotel.address} <span></span>
+              {hotel.email} <span></span>
+              <button onClick={() => handleDeleteText(hotel._id)}>
+                Supprimer
+              </button>
             </li>
           ))}
         </ul>
         <input
           type="text"
-          value={newText}
-          onChange={(e) => setNewText(e.target.value)}
+          name="nameHotel"
+          value={nameHotel}
+          onChange={(e) => setNameHotel(e.target.value)}
           placeholder="Nouveau texte"
+        />
+        <input
+          type="address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          placeholder="Address"
+        />
+        <input
+          type="email"
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
         />
         <button onClick={handleCreateText}>Créer</button>
       </div>
