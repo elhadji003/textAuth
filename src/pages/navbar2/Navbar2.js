@@ -25,7 +25,7 @@ import {
 import { IconButton } from "../../styles/Navabar.Style";
 
 const Navbar2 = () => {
-  onst[(token, setToken)] = useState(null);
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
