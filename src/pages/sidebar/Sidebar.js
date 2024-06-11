@@ -39,6 +39,7 @@ import ProfileAdmin from "../../app/assets/user-profile.jpg";
 import { IconButton, ProfileImage } from "../../styles/Navabar.Style";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { Input } from "@/styles/Creer.Style";
 
 const Sidebar = () => {
   const [isSidebarActive, setSidebarActive] = useState(false);
@@ -123,6 +124,7 @@ const Sidebar = () => {
 
   const handleImageUpload = async () => {
     if (!selectedImage) return;
+    setUpload(null);
 
     const formData = new FormData();
     formData.append("profileImage", selectedImage);
@@ -226,7 +228,8 @@ const Sidebar = () => {
 
                 {upload && (
                   <div className="uploads">
-                    <input
+                    <Input
+                      id="dropzone-file"
                       className="form-control"
                       type="file"
                       accept="image/*"

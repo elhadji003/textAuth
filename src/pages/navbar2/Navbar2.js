@@ -43,6 +43,9 @@ const Navbar2 = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("profileImageUrl");
+    setUser(null);
     router.push("/");
   };
 
