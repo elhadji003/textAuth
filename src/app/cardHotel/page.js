@@ -5,6 +5,22 @@ import Sidebar from "@/pages/sidebar/Sidebar";
 import Hotel from "@/pages/hotel/Hotel";
 
 export default function CardHotel() {
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    setToken(storedToken);
+  }, []);
+
+  if (!token) {
+    return (
+      <div className="d-flex justify-content-center align-items-center">
+        Loading... Votre session a expiré veuillez vous reconnecter !
+        <Link href="/">Je me connecte</Link>
+      </div>
+    );
+  }
+
   return (
     <div className="container-fluid">
       <div className="row">

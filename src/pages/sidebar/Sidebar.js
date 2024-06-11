@@ -45,8 +45,8 @@ const Sidebar = () => {
   const [chevron, setChevron] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [upload, setUpload] = useState(false);
-  const router = useRouter();
   const [user, setUser] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -58,8 +58,10 @@ const Sidebar = () => {
               "x-auth-token": token,
             },
           });
-          setUser(userRes.data);
-          console.log(userRes);
+          const userData = userRes.data;
+          setUser(userData);
+          // Stocker les données utilisateur dans le localStorage
+          localStorage.setItem("user", JSON.stringify(userData));
           const storedProfileImageUrl = localStorage.getItem("profileImageUrl");
           if (storedProfileImageUrl) {
             setUser((prevUser) => ({
@@ -72,8 +74,22 @@ const Sidebar = () => {
         }
       }
     };
-    fetchUserData();
+
+    // Récupérer les données utilisateur depuis le localStorage
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    } else {
+      fetchUserData();
+    }
   }, [router]);
+
+  useEffect(() => {
+    const storedProfileImageUrl = localStorage.getItem("profileImageUrl");
+    if (storedProfileImageUrl) {
+      setSelectedImage(storedProfileImageUrl);
+    }
+  }, []);
 
   const toggleSidebar = () => {
     setSidebarActive(!isSidebarActive);
@@ -82,12 +98,16 @@ const Sidebar = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setUser(null);
     router.push("/");
   };
 
   const handleProfileImageChange = (e) => {
-    setSelectedImage(e.target.files[0]);
+    if (e.target.files && e.target.files[0]) {
+      setSelectedImage(e.target.files[0]);
+      setUpload(true);
+    }
   };
 
   const handleImageUpload = async () => {
@@ -109,11 +129,12 @@ const Sidebar = () => {
           },
         }
       );
+      const profileImageUrl = res.data.profileImageUrl;
       setUser((prevUser) => ({
         ...prevUser,
-        profileImageUrl: res.data.profileImageUrl,
+        profileImageUrl,
       }));
-      localStorage.setItem("profileImageUrl", res.data.profileImageUrl);
+      localStorage.setItem("profileImageUrl", profileImageUrl);
       setSelectedImage(null);
       setUpload(false);
     } catch (err) {
@@ -153,7 +174,7 @@ const Sidebar = () => {
                 <Div4>Principale</Div4>
               </List>
               <ListLi>
-                <Link href="/dashboard">
+                <Link href="/homePage">
                   <RiDashboardFill size={25} />
                   Dashboard
                 </Link>
@@ -167,23 +188,21 @@ const Sidebar = () => {
               <ProfileBasMere>
                 <ProfileBas>
                   <ProfileImage onClick={handleSeeInput}>
-                    <ProfileImage onClick={handleSeeInput}>
-                      {selectedImage ? (
-                        <Image
-                          src={URL.createObjectURL(selectedImage)}
-                          alt="Profile Admin"
-                          width={40}
-                          height={40}
-                        />
-                      ) : (
-                        <Image
-                          src={(user && user.profileImageUrl) || ProfileAdmin}
-                          alt="Profile Admin"
-                          width={40}
-                          height={40}
-                        />
-                      )}
-                    </ProfileImage>
+                    {selectedImage ? (
+                      <Image
+                        src={URL.createObjectURL(selectedImage)}
+                        alt="Profile Admin"
+                        width={40}
+                        height={40}
+                      />
+                    ) : (
+                      <Image
+                        src={(user && user.profileImageUrl) || ProfileAdmin}
+                        alt="Profile Admin"
+                        width={40}
+                        height={40}
+                      />
+                    )}
                   </ProfileImage>
                   <ProfileTextBas>
                     <ProfileName>

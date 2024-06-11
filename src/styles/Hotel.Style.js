@@ -1,9 +1,27 @@
-"use client"
-import styled from "styled-components"; 
+"use client";
+import styled from "styled-components";
 
-export const HotelSection = styled.section`
+export const HotelSection = styled.section``;
+
+export const Nodispo = styled.div`
+  text-align: center;
 `;
 
+export const CenterDiv = styled.div`
+  position: relative;
+  @media screen and (min-width: 320px) {
+    left: 0rem;
+  }
+  @media screen and (min-width: 768px) {
+    left: 14rem;
+  }
+  @media screen and (min-width: 1024px) {
+    left: 18rem;
+  }
+  @media screen and (min-width: 1280px) {
+    left: 26rem;
+  }
+`;
 
 export const SecContent = styled.div`
   display: grid;
@@ -37,7 +55,6 @@ export const SingleDestination = styled.div`
   overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
-
   @media screen and (min-width: 320px) {
     width: auto;
   }
@@ -64,20 +81,20 @@ export const ImageDiv = styled.div`
 
   @media screen and (min-width: 320px) {
     width: auto;
-    height: 200px
-  };
+    height: 200px;
+  }
   @media screen and (min-width: 768px) {
     width: 350px;
     height: 200px;
-  };
+  }
   @media screen and (min-width: 1024px) {
     width: 250px;
     height: 200px;
-  };
+  }
   @media screen and (min-width: 1280px) {
     width: 300px;
     height: 200px;
-  };
+  }
   @media screen and (min-width: 1536px) {
     width: 300px;
     height: 200px;
@@ -97,9 +114,6 @@ export const Address = styled.span`
   font-size: 0.6rem;
   color: red;
 
-
-
-
   @media screen and (min-width: 320px) {
     font-size: 0.8rem;
     font-weight: bold;
@@ -116,7 +130,6 @@ export const DestTitle = styled.p`
   font-weight: bold;
   margin: 0.5rem 0;
   color: #555;
-
 `;
 
 export const Price = styled.div`
@@ -125,25 +138,22 @@ export const Price = styled.div`
 
 export const Modal = styled.div`
   width: 100%;
-  hight: 100%; 
-`
-
-
+  hight: 100%;
+`;
 
 export const TheBtns = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
   padding: 0.5rem;
-`
+`;
 
 export const TIcons = styled.button`
   border: none;
   background: none;
   color: black;
   position: relative;
-  
-`
+`;
 
 export const SeeAllButtons = styled.div`
   display: flex;
@@ -153,51 +163,44 @@ export const SeeAllButtons = styled.div`
   padding: 0.5rem;
   gap: 1rem;
   // transition: .4s;
-`
+`;
 
 export const ImageHotel = styled.image`
   width: 300px;
   hight: 200px;
-`
+`;
 
 export const ModalDetails = styled.div`
   max-width: 40rem;
   background: white;
   margin: 0 auto;
   margin-top: 0.5rem;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;  
-`
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+`;
 
-export const ImageModalMere = styled.div`
-    
-`
+export const ImageModalMere = styled.div``;
 
-export const ModalMere = styled.div`
-`
-
+export const ModalMere = styled.div``;
 
 export const ModalTitle = styled.div`
   font-size: 1.5rem;
   text-align: center;
   font-weight: bold;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;  
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   margin-bottom: 1rem;
-
-
-`
+`;
 
 export const ModalText = styled.div`
   padding: 0.5rem;
   font-size: 1rem;
   font-weight: bold;
-`
+`;
 
 export const ModalTextSpan = styled.span`
   padding: 0.5rem;
   font-size: 1rem;
   font-weight: lighter;
-`
-
+`;
 
 export const ModalBtnClose = styled.button`
   background: none;
@@ -207,8 +210,7 @@ export const ModalBtnClose = styled.button`
   background: #333;
   color: white;
   border: none;
-
-`
+`;
 export const ModalBtnEdit = styled.button`
   background: none;
   padding: 0.2rem 1.5rem;
@@ -218,16 +220,15 @@ export const ModalBtnEdit = styled.button`
   color: #333;
   border: none;
   font-weight: bold;
-  a{
+  a {
     text-decoration: none;
     color: #333;
   }
-`
+`;
 
 export const ModalForm = styled.form`
   display: flex;
   flex-direction: column;
-  
 `;
 
 export const ModalInput = styled.input`
@@ -247,8 +248,7 @@ export const BtnPrev = styled.button`
   border-radius: 1rem;
   padding: 0.3rem;
   color: #fff;
- 
-`
+`;
 export const BtnNext = styled.button`
   border: none;
   background: skyblue;
@@ -256,16 +256,14 @@ export const BtnNext = styled.button`
   border-radius: 1rem;
   padding: 0.3rem;
   color: #fff;
-
-`
+`;
 
 export const BtnPrevNext = styled.div`
   display: flex;
   gap: 1rem;
   justify-content: end;
   padding: 0.3rem;
-  
-`
+`;
 
 export const LeftRight = styled.div`
   display: flex;
@@ -275,51 +273,50 @@ export const LeftRight = styled.div`
   @media screen and (min-width: 320px) {
     flex-direction: column;
   }
-  @media screen and (min-width:  768px) {
+  @media screen and (min-width: 768px) {
     flex-direction: row;
   }
   @media screen and (min-width: 1024px) {
     flex-direction: row;
   }
-  `
+`;
 
 export const MaDiv = styled.div`
   display: flex;
   flex-direction: column;
-`
+`;
 export const DivAuDessus = styled.div`
-  position: relative;  
-`
+  position: relative;
+`;
 export const DivEnDessous = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-position: absolute;
-width: 82%;
-// margin-top: -30rem;
-background-color: rgba(0, 0, 0, 0.5); /* Optionnel : pour un fond semi-transparent */
-z-index: 1000; /* Assurez-vous qu'il apparaît au-dessus du contenu */
-
-@media screen and (min-width: 320px){
-  width: 96%;
-  padding: 0rem;
-}
-@media screen and (min-width: 768px){
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
   width: 82%;
-  padding: 0rem;
+  // margin-top: -30rem;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Optionnel : pour un fond semi-transparent */
+  z-index: 1000; /* Assurez-vous qu'il apparaît au-dessus du contenu */
 
-}
-@media screen and (min-width: 1024px){
-  width: 82%;
-  padding: 0rem;
-
-}
-@media screen and (min-width: 1440px){
-  width: 82%;
-  padding: 0rem;
-
-}
-
-  
-  
-`
+  @media screen and (min-width: 320px) {
+    width: 96%;
+    padding: 0rem;
+  }
+  @media screen and (min-width: 768px) {
+    width: 82%;
+    padding: 0rem;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 82%;
+    padding: 0rem;
+  }
+  @media screen and (min-width: 1440px) {
+    width: 82%;
+    padding: 0rem;
+  }
+`;

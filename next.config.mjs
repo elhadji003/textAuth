@@ -4,10 +4,6 @@ const nextConfig = {
   images: {
     domains: ["localhost"],
   },
-  styledComponents: true,
-  compiler: {
-    reactStrictMode: true,
-  },
 };
 
 export default nextConfig;

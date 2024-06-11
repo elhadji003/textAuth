@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import styled from "styled-components";
 
 export const StyledContainer = styled.div`
@@ -19,10 +19,10 @@ export const StyledLogoContainer = styled.div`
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  margin-bottom: 0.5rem
+  margin-bottom: 0.5rem;
 `;
 export const StyledIcon = styled.div`
-  width: 2rem; 
+  width: 2rem;
   height: 2rem;
 `;
 
@@ -48,12 +48,12 @@ export const StyledFrm = styled.form`
 `;
 
 export const StyledFrmInput = styled.form`
-  margin-bottom: 0.75rem; 
+  margin-bottom: 0.75rem;
 `;
 
 export const StyledFrmLabel = styled.label`
   font-weight: bold;
-  color: #45484B;
+  color: #45484b;
 `;
 
 export const StyledInfo = styled.p`
@@ -79,7 +79,6 @@ export const StyledInput = styled.input`
     outline: none;
     border: 1px solid #494c4f;
     border-radius: 1rem;
-
   }
 `;
 
@@ -91,19 +90,19 @@ export const StyledCheckboxContainer = styled.div`
 `;
 
 export const StyledCheckboxInput = styled.input`
-    margin-bottom: 0.75rem
+  margin-bottom: 0.75rem;
 `;
 
 export const StyledCheckboxText = styled.p`
-  color: #4b5563; 
+  color: #4b5563;
   font-weight: bold;
   font-size: 0.875rem;
-  margin-bottom: 0.75rem
+  margin-bottom: 0.75rem;
 `;
 
 export const StyledSubmitButton = styled.button`
   width: 100%;
-  background: #45484B;
+  background: #45484b;
   color: #ffffff;
   text-align: center;
   font-weight: bold;
@@ -120,7 +119,7 @@ export const StyledSubmitButton = styled.button`
 
 export const StyledButton = styled.button`
   width: 100%;
-  background: #45484B;
+  background: #45484b;
   color: #ffffff;
   text-align: center;
   font-weight: bold;
@@ -142,7 +141,7 @@ export const StyledForgotPasswordLien = styled.div`
 export const StyledSignupLien = styled.div`
   color: white;
   margin-bottom: 1rem;
-  a{
+  a {
     color: #ffcc00;
   }
 `;
@@ -150,14 +149,14 @@ export const StyledSignupLien = styled.div`
 export const StyledBackToLoginLien = styled.div`
   color: white;
   margin-bottom: 0rem;
-  a{
+  a {
     color: #ffcc00;
   }
 `;
 
 export const StyledTextInfo = styled.div`
-color: #a1a2a3;
-margin-bottom: 2rem;
+  color: #a1a2a3;
+  margin-bottom: 2rem;
 `;
 
 export const ErrorMessage = styled.div`
@@ -170,7 +169,7 @@ export const ErrorMessage = styled.div`
   margin-bottom: 1rem;
   font-weight: bold;
 
-`
+`;
 
 export const SuccessMessage = styled.div`
   background: lime;
@@ -182,12 +181,12 @@ export const SuccessMessage = styled.div`
   font-weight: bold;
   color: #037430;
 
-`
+`;
 
 export const IconDiv = styled.div`
   position: relative;
   top: -0.5rem;
-`
+`;
 
 export const IconDivBtn = styled.button`
   background: none;
@@ -195,10 +194,10 @@ export const IconDivBtn = styled.button`
   position: relative;
   left: -2rem;
   top: -0.5rem;
-`
+`;
 
 export const PwdDiv = styled.div`
   display: flex;
   align-items: center;
   width: 105%;
-`
+`;

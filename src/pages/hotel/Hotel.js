@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { CiNoWaitingSign } from "react-icons/ci";
 import "animate.css";
 import {
   HotelSection,
@@ -28,6 +29,8 @@ import {
   MaDiv,
   DivAuDessus,
   DivEnDessous,
+  Nodispo,
+  CenterDiv,
 } from "../../styles/Hotel.Style";
 import {
   Navbar2Container,
@@ -69,7 +72,9 @@ import {
   faPlus,
   faPlusCircle,
   faRightToBracket,
+  faSignal,
   faTrash,
+  faUnlockAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Link from "next/link";
@@ -291,6 +296,14 @@ const Hotel = () => {
               </ModalDetails>
             ) : (
               <SecContent>
+                {filteredHotels.length === 0 && (
+                  <Nodispo>
+                    <CenterDiv>
+                      <CiNoWaitingSign size={30} />
+                      <p>Aucun hotel disponible pour le moment.</p>
+                    </CenterDiv>
+                  </Nodispo>
+                )}
                 {filteredHotels.map((hotel, index) => (
                   <SingleDestination key={hotel._id} data-aos="fade-up">
                     <ImageModalMere>

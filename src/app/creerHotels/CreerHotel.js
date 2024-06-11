@@ -9,6 +9,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./creerHotel.scss";
 import { faArrowLeft, faImage } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
+import {
+  Container,
+  Card,
+  Title,
+  Header,
+  Row,
+  FrGr2oup,
+  Label,
+  Input,
+  Select,
+  Footer,
+  Dropzone,
+  StyledFrInput,
+  StyledSubmitCreer,
+  FlexEnd,
+  Form,
+  DivImage2,
+} from "../../styles/Creer.Style";
+import { ButtonModal } from "../../styles/Navbar2.Style";
 
 const CreerHotel = () => {
   const [hotels, setHotels] = useState([]);
@@ -97,131 +116,120 @@ const CreerHotel = () => {
   return (
     <>
       {showModal && (
-        <div className="animate__animated animate__bounce animate__fadeIn">
-          <div className="container">
-            <div className="card">
-              <div className="header">
-                <button onClick={handleClose}>
-                  <FontAwesomeIcon icon={faArrowLeft} />
-                </button>
-                <h3 className="title">Créer un nouveau hôtel</h3>
-              </div>
-              <form onSubmit={handleSubmit} className="hotel-form">
-                <div className="flex-input">
-                  <div className="formGrp">
-                    <div className="form-group">
-                      <label htmlFor="hotel-name">Nom de l'hôtel</label>
-                      <input
-                        id="hotel-name"
-                        type="text"
-                        name="nameHotel"
-                        placeholder="CAP Marniane"
-                        value={formData.nameHotel}
-                        onChange={handleChange}
-                        className="form-control"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="email">Email</label>
-                      <input
-                        id="email"
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="form-control"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="price">Prix par nuit</label>
-                      <input
-                        id="price"
-                        type="text"
-                        name="price"
-                        placeholder="125.000 XOF"
-                        value={formData.price}
-                        onChange={handleChange}
-                        className="form-control"
-                      />
-                    </div>
-                  </div>
-                  <div className="formGrp">
-                    <div className="form-group">
-                      <label htmlFor="address">Adresse</label>
-                      <input
-                        id="address"
-                        type="text"
-                        name="address"
-                        placeholder="Les îles de ..."
-                        value={formData.address}
-                        onChange={handleChange}
-                        className="form-control"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="phone">Numéro de téléphone</label>
-                      <input
-                        id="phone"
-                        type="text"
-                        name="number"
-                        placeholder="+221 ..."
-                        value={formData.number}
-                        onChange={handleChange}
-                        className="form-control"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="currency">Devise</label>
-                      <select
-                        id="currency"
-                        name="devise"
-                        value={formData.devise}
-                        onChange={handleChange}
-                        className="form-control"
-                      >
-                        <option value="XOF">F XOF</option>
-                        <option value="Euro">Euro</option>
-                        <option value="Dollar">$</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="file">Ajouter une photo</label>
-                  <label htmlFor="dropzone-file" className="dropzone">
-                    {selectedImage ? (
-                      <Image
-                        src={URL.createObjectURL(selectedImage)}
-                        alt="selected-img"
-                        width={300}
-                        height={200}
-                      />
-                    ) : (
-                      <div className="image-icon">
-                        <FontAwesomeIcon icon={faImage} size="3x" />
-                      </div>
-                    )}
-                    <input
-                      id="dropzone-file"
-                      type="file"
-                      accept="images/*"
-                      onChange={handleFileChange}
-                      style={{ display: "none" }}
+        <Container className="animate__animated animate__bounce animate__fadeIn">
+          <Card>
+            <Header>
+              <ButtonModal onClick={handleClose}>
+                <FontAwesomeIcon icon={faArrowLeft} />
+              </ButtonModal>
+              <Title>Créer un nouveau hôtel</Title>
+            </Header>
+            <Form onSubmit={handleSubmit}>
+              <Row>
+                <FrGr2oup>
+                  <StyledFrInput>
+                    <Label htmlFor="hotel-name">Nom de l'hôtel</Label>
+                    <Input
+                      id="hotel-name"
+                      type="text"
+                      name="nameHotel"
+                      placeholder="CAP Marniane"
+                      value={formData.nameHotel}
+                      onChange={handleChange}
                     />
-                  </label>
-                </div>
-                <div className="flex-end">
-                  <button type="submit" className="submit-button">
-                    Enregistrer
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
+                  </StyledFrInput>
+                  <StyledFrInput>
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      name="email"
+                      placeholder="Email"
+                      value={formData.email}
+                      onChange={handleChange}
+                    />
+                  </StyledFrInput>
+                  <StyledFrInput>
+                    <Label htmlFor="price">Prix par nuit</Label>
+                    <Input
+                      id="price"
+                      type="text"
+                      name="price"
+                      placeholder="125.000 XOF"
+                      value={formData.price}
+                      onChange={handleChange}
+                    />
+                  </StyledFrInput>
+                </FrGr2oup>
+                <FrGr2oup>
+                  <StyledFrInput>
+                    <Label htmlFor="address">Adresse</Label>
+                    <Input
+                      id="address"
+                      type="text"
+                      name="address"
+                      placeholder="Les îles de ..."
+                      value={formData.address}
+                      onChange={handleChange}
+                    />
+                  </StyledFrInput>
+                  <StyledFrInput>
+                    <Label htmlFor="phone">Numéro de téléphone</Label>
+                    <Input
+                      id="phone"
+                      type="text"
+                      name="number"
+                      placeholder="+221 ..."
+                      value={formData.number}
+                      onChange={handleChange}
+                    />
+                  </StyledFrInput>
+                  <StyledFrInput>
+                    <Label htmlFor="currency">Devise</Label>
+                    <Select
+                      id="currency"
+                      name="devise"
+                      value={formData.devise}
+                      onChange={handleChange}
+                    >
+                      <option value="XOF">F XOF</option>
+                      <option value="Euro">Euro</option>
+                      <option value="Dollar">$</option>
+                    </Select>
+                  </StyledFrInput>
+                </FrGr2oup>
+              </Row>
+              <Footer>
+                <Label htmlFor="file">Ajouter une photo</Label>
+                <Dropzone htmlFor="dropzone-file">
+                  {selectedImage ? (
+                    <Image
+                      src={URL.createObjectURL(selectedImage)}
+                      alt="selected-img"
+                      width={300}
+                      height={200}
+                    />
+                  ) : (
+                    <DivImage2>
+                      <FontAwesomeIcon icon={faImage} size="3x" />
+                    </DivImage2>
+                  )}
+                  <Input
+                    id="dropzone-file"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    style={{ display: "none" }}
+                  />
+                </Dropzone>
+              </Footer>
+              <FlexEnd>
+                <StyledSubmitCreer type="submit">Enregistrer</StyledSubmitCreer>
+              </FlexEnd>
+            </Form>
+          </Card>
           <ToastContainer />
-        </div>
+        </Container>
       )}
     </>
   );

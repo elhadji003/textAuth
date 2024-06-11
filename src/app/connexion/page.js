@@ -1,28 +1,50 @@
 "use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
+import React, { useState } from "react";
 import Link from "next/link";
-import axios from "axios";
-import "./connexion.scss";
 import iconRed from "../assets/icon.png";
 import Image from "next/image";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import {
+  StyledCheckboxContainer,
+  StyledCheckboxInput,
+  StyledCheckboxText,
+  StyledContainer,
+  StyledForgotPasswordLien,
+  StyledFrm,
+  Form,
+  StyledFrmInput,
+  StyledFrmLabel,
+  StyledIcon,
+  StyledInfo,
+  StyledInput,
+  StyledLogoContainer,
+  StyledSignupLien,
+  StyledSubmitButton,
+  StyledText,
+  IconDivBtn,
+  PwdDiv,
+} from "../../styles/Connexion.Style";
+import axios from "axios";
 
-const Login = () => {
-  const router = useRouter();
-
+const Connexion = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
+  const router = useRouter();
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post("http://localhost:5000/api/auth/login", {
@@ -38,74 +60,73 @@ const Login = () => {
     }
   };
 
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
-    <div className="Connexion">
-      <div className="header">
-        <div>
-          <Image src={iconRed} alt="logo" />
-        </div>
-        <div>Red Product</div>
-      </div>
-      <div className="connexion-box">
-        <div className="title">
-          <div>Connectez vous en tant qu'admin</div>
-        </div>
-        <form onSubmit={onSubmit}>
-          <div className="box-input">
-            <div className="input">
-              <label>Email</label>
-              <input
-                type="email"
+    <>
+      <StyledContainer>
+        <StyledLogoContainer>
+          <StyledIcon>
+            <Image src={iconRed} alt="logo Red" />
+          </StyledIcon>
+          <StyledText>Red Product</StyledText>
+        </StyledLogoContainer>
+        <Form>
+          <StyledFrm onSubmit={handleSubmit}>
+            <StyledInfo>Connectez-vous en tant qu'admin</StyledInfo>
+            <StyledFrmInput>
+              <StyledFrmLabel htmlFor="email">Email</StyledFrmLabel>
+              <StyledInput
+                id="email"
                 name="email"
+                type="email"
                 value={values.email}
                 onChange={handleChange}
               />
-            </div>
-          </div>
-
-          <div className="box-input">
-            <div className="input">
-              <label>Password</label>
-              <input
-                type="password"
-                name="password"
-                value={values.password}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-
-          <div className="box-input">
-            <div className="check">
-              <input
+            </StyledFrmInput>
+            <StyledFrmInput>
+              <StyledFrmLabel htmlFor="password">Mot de passe</StyledFrmLabel>
+              <PwdDiv>
+                <StyledInput
+                  id="password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  value={values.password}
+                  onChange={handleChange}
+                />
+                <IconDivBtn type="button" onClick={toggleShowPassword}>
+                  <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                </IconDivBtn>
+              </PwdDiv>
+            </StyledFrmInput>
+            <StyledCheckboxContainer>
+              <StyledCheckboxInput
                 type="checkbox"
                 id="coding"
                 name="interest"
                 value="coding"
               />
-              <span>Garder moi connecter</span>
-            </div>
-          </div>
+              <StyledCheckboxText>Garder-moi connecté</StyledCheckboxText>
+            </StyledCheckboxContainer>
+            <StyledSubmitButton type="submit">Se connecter</StyledSubmitButton>
+          </StyledFrm>
+        </Form>
+        <Link href="/forgotpwd">
+          <StyledForgotPasswordLien>
+            Mot de passe oublié?
+          </StyledForgotPasswordLien>
+        </Link>
+        <StyledSignupLien>
+          Vous n'avez pas de compte?{" "}
+          <Link href="/inscription">Inscription</Link>
+        </StyledSignupLien>
 
-          <div className="btn-con">
-            <button className="btn-connexion" type="submit">
-              Se Connecter
-            </button>
-          </div>
-        </form>
-      </div>
-      <div className="footer-con">
-        <div className="pwd">
-          <Link href={"/mdpoublie"}>Mot de passe oublier ?</Link>
-        </div>
-        <div className="inscrire">
-          <span>Vous n'avez pas de compte ?</span>
-          <Link href={"/inscription"}> S'inscrire</Link>
-        </div>
-      </div>
-      <ToastContainer />
-    </div>
+        <ToastContainer />
+      </StyledContainer>
+    </>
   );
 };
 
-export default Login;
+export default Connexion;
