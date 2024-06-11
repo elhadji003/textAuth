@@ -1,8 +1,9 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Sidebar from "@/pages/sidebar/Sidebar";
 import Hotel from "@/pages/hotel/Hotel";
+import Link from "next/link";
 
 export default function CardHotel() {
   const [token, setToken] = useState(null);

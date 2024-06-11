@@ -62,13 +62,17 @@ const Sidebar = () => {
           setUser(userData);
           // Stocker les données utilisateur dans le localStorage
           localStorage.setItem("user", JSON.stringify(userData));
-          const storedProfileImageUrl = localStorage.getItem("profileImageUrl");
-          if (storedProfileImageUrl) {
-            setUser((prevUser) => ({
-              ...prevUser,
-              profileImageUrl: storedProfileImageUrl,
-            }));
-          }
+
+          // Récupérer l'URL de l'image de profil depuis le backend
+          const profileImageRes = await axios.get(
+            `http://localhost:5000/api/auth/profile/${userData._id}`
+          );
+          const profileImageUrl = profileImageRes.data.profileImageUrl;
+          setUser((prevUser) => ({
+            ...prevUser,
+            profileImageUrl,
+          }));
+          localStorage.setItem("profileImageUrl", profileImageUrl);
         } catch (err) {
           console.error(err);
         }
@@ -78,18 +82,21 @@ const Sidebar = () => {
     // Récupérer les données utilisateur depuis le localStorage
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      const userData = JSON.parse(storedUser);
+      setUser(userData);
+      const storedProfileImageUrl = localStorage.getItem("profileImageUrl");
+      if (storedProfileImageUrl) {
+        setUser((prevUser) => ({
+          ...prevUser,
+          profileImageUrl: storedProfileImageUrl,
+        }));
+      } else {
+        fetchUserData();
+      }
     } else {
       fetchUserData();
     }
   }, [router]);
-
-  useEffect(() => {
-    const storedProfileImageUrl = localStorage.getItem("profileImageUrl");
-    if (storedProfileImageUrl) {
-      setSelectedImage(storedProfileImageUrl);
-    }
-  }, []);
 
   const toggleSidebar = () => {
     setSidebarActive(!isSidebarActive);
@@ -99,6 +106,7 @@ const Sidebar = () => {
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem("profileImageUrl");
     setUser(null);
     router.push("/");
   };
@@ -112,7 +120,6 @@ const Sidebar = () => {
 
   const handleImageUpload = async () => {
     if (!selectedImage) return;
-    setUpload(null);
 
     const formData = new FormData();
     formData.append("profileImage", selectedImage);
@@ -120,7 +127,7 @@ const Sidebar = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.post(
-        "http://localhost:5000/api/auth/uploadProfileImage",
+        "http://localhost:5000/api/auth/updateProfileImage",
         formData,
         {
           headers: {
@@ -197,7 +204,7 @@ const Sidebar = () => {
                       />
                     ) : (
                       <Image
-                        src={(user && user.profileImageUrl) || ProfileAdmin}
+                        src={user?.profileImageUrl || ProfileAdmin}
                         alt="Profile Admin"
                         width={40}
                         height={40}
