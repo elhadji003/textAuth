@@ -102,11 +102,14 @@ const Hotel = () => {
       const token = localStorage.getItem("token");
 
       if (token) {
-        const response = await axios.get("http://localhost:5000/api/hotels", {
-          headers: {
-            "x-auth-token": token,
-          },
-        });
+        const response = await axios.get(
+          "https://textauthapi-1.onrender.com/api/hotels",
+          {
+            headers: {
+              "x-auth-token": token,
+            },
+          }
+        );
         setHotels(response.data);
         setNombre(response.data.length);
       }
@@ -125,11 +128,14 @@ const Hotel = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/hotels/${id}`, {
-        headers: {
-          "x-auth-token": token,
-        },
-      });
+      await axios.delete(
+        `https://textauthapi-1.onrender.com/api/hotels/${id}`,
+        {
+          headers: {
+            "x-auth-token": token,
+          },
+        }
+      );
       setHotels(hotels.filter((hotel) => hotel._id !== id));
       toast.success("Hôtel supprimé avec succès.");
     } catch (err) {

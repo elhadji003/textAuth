@@ -54,7 +54,7 @@ const ResetPassword = () => {
     try {
       const token = window.location.pathname.split("/").pop(); // Assumes the token is in the URL
       const response = await axios.post(
-        "http://localhost:5000/api/auth/resetPassword",
+        "https://textauthapi-1.onrender.com/api/auth/resetPassword",
         { token, password }
       );
 

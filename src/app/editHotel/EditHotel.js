@@ -69,7 +69,7 @@ const EditHotelComponent = () => {
   const fetchHotelData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/hotels/${hotelId}`
+        `https://textauthapi-1.onrender.com/api/hotels/${hotelId}`
       );
       setFormData({
         nameHotel: response.data.nameHotel,
@@ -115,13 +115,16 @@ const EditHotelComponent = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:5000/api/hotels/${hotelId}`, {
-        method: "PUT",
-        body: form,
-        headers: {
-          "x-auth-token": token,
-        },
-      });
+      const res = await fetch(
+        `https://textauthapi-1.onrender.com/api/hotels/${hotelId}`,
+        {
+          method: "PUT",
+          body: form,
+          headers: {
+            "x-auth-token": token,
+          },
+        }
+      );
 
       const result = await res.json();
 

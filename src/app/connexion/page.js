@@ -47,10 +47,13 @@ const Connexion = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
-        email: values.email,
-        password: values.password,
-      });
+      const res = await axios.post(
+        "https://textauthapi-1.onrender.com/api/auth/login",
+        {
+          email: values.email,
+          password: values.password,
+        }
+      );
       localStorage.setItem("token", res.data.token);
       toast.success("Connexion réussie");
       router.push("/homePage");

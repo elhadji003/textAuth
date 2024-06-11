@@ -28,7 +28,7 @@ const ForgotPwd = () => {
   const handleForgotPassword = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/auth/forgotPassword",
+        "https://textauthapi-1.onrender.com/api/auth/forgotPassword",
         {
           method: "POST",
           headers: {
