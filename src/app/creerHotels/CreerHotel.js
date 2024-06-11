@@ -71,7 +71,7 @@ const CreerHotel = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.post(
-        "https://textauthapi-1.onrender.com/api/hotels",
+        "http://localhost:5000/api/hotels",
         formDataToSend,
         {
           headers: {
